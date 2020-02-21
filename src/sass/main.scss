@@ -1,0 +1,10 @@
+@import './abstracts/abstracts-dir';
+@import './base/base-dir';
+
+.title {
+	@include fluid-type(28px, 52px);
+}
+
+.body {
+	@include fluid-type(14px, 20px);
+}
