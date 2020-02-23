@@ -1,23 +1,15 @@
-@mixin fluid-type($min-font-size: 12px, $max-font-size: 21px, $lower-range: 420px, $upper-range: 900px) {
-	font-size: calc(#{$min-font-size} + #{(($max-font-size / ($max-font-size * 0 + 1)) - ($min-font-size / ($min-font-size * 0 + 1)))} * ((100vw - #{$lower-range}) / #{(($upper-range / ($upper-range * 0 + 1)) - ($lower-range / ($lower-range * 0 + 1)))}));
+html {
+	font-size: 16px;
+}
 
-	@media screen and (max-width: $lower-range) {
-		font-size: $min-font-size;
-	}
-
-	@media screen and (min-width: $upper-range) {
-		font-size: $max-font-size;
+@media screen and (min-width: 320px) {
+	html {
+		font-size: calc(16px + 6 * ((100vw - 320px) / 680));
 	}
 }
 
-p {
-	@include fluid-type(14px, 20px);
-
-	font-weight: normal;
-}
-
-h1 {
-	@include fluid-type(28px, 52px);
-
-	font-weight: 100;
+@media screen and (min-width: 1000px) {
+	html {
+		font-size: 22px;
+	}
 }

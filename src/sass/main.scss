@@ -1,10 +1,12 @@
-@import './abstracts/abstracts-dir';
 @import './base/base-dir';
+@import './abstracts/abstracts-dir';
+@import './components/components-dir';
 
-.title {
-	@include fluid-type(28px, 52px);
-}
+//.autoprefixer-test { //test autoprefixer.
+//	user-select: none;
+//}
 
-.body {
-	@include fluid-type(14px, 20px);
-}
+//body { //test scss-loader.
+//	user-select: auto;
+//	background-color: darkblue;
+//}

@@ -1,11 +1,13 @@
 const path = require('path');
-// const webpack = require('webpack');
+const webpack = require('webpack');
+const autoprefixer = require('autoprefixer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-	entry: {app: './src/js/app.js'},
+	entry: { app: './src/js/app.js' },
 	output: {
 		path: path.resolve(__dirname, 'dist'),
 		filename: 'bundle.js',
@@ -24,9 +26,9 @@ module.exports = {
 				]
 			},
 			{
-				test: /\.scss$/,
+				test: /\.s[ac]ss$/i,
 				use: [
-					MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'
+					MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader'
 				]
 			},
 			{
@@ -63,6 +65,10 @@ module.exports = {
 					}
 				],
 				exclude: path.resolve(__dirname, 'src/index.html')
+			},
+			{
+				test: /\.(woff|woff2|eot|ttf|svg)$/,
+				loader: 'url-loader?limit=100000'
 			}
 		]
 	},
@@ -80,6 +86,16 @@ module.exports = {
 			filename: 'index.html',
 			template: 'src/index.html'
 		}),
+		new CopyWebpackPlugin([
+			{ from: path.resolve(__dirname, 'src/sass/abstracts/fonts'), to: 'fonts' }
+		]),
+		new webpack.LoaderOptionsPlugin({
+			options: {
+				postcss: [
+					autoprefixer()
+				]
+			}
+		}),
 		// new HtmlWebpackPlugin({
 		// 	filename: "users.html",
 		// 	template: 'src/users.html',
@@ -90,4 +106,3 @@ module.exports = {
 		})
 	],
 };
-
