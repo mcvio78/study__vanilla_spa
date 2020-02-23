@@ -16,7 +16,8 @@ module.exports = {
 	"rules": {
 		"no-console": 0,
 		"quotes": [1, "single", { "avoidEscape": true }],
+		"semi": 1,
 		"no-useless-escape": 0,
-		"semi": 1
+		"no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 0 }]
 	}
 };

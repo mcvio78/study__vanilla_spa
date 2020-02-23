@@ -13,27 +13,3 @@
 		url('/fonts/raleway-v14-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
 		url('/fonts/raleway-v14-latin-regular.svg#Raleway') format('svg'); /* Legacy iOS */
 }
-
-///* atma-regular - latin */
-//@font-face {
-//	font-family: 'Atma';
-//	font-style: normal;
-//	font-weight: 400;
-//	src:
-//		local('Atma Regular'),
-//		local('Atma-Regular'),
-//		url('/src/sass/abstracts/fonts/atma-v5-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-//		url('/src/sass/abstracts/fonts/atma-v5-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-//}
-
-h1 {
-	font-family: 'Raleway', sans-serif;
-}
-
-//*:not(.fa) {
-//	font-family: //your font-family;
-//},
-
-//*:not(i):not(.fa):not(.YourClassName) {
-//	font-family: //your font-family;
-//}

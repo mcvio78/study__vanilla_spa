@@ -1,3 +1,5 @@
 @import 'normalize/variables';
-@import 'normalize/vertical-rhythm';
 @import 'normalize/normalize-mixin';
+@import 'normalize/vertical-rhythm';
+
+@include normalize()
