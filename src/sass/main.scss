@@ -1,7 +1,6 @@
-@import './base/base-dir';
-@import './abstracts/abstracts-dir';
-@import './layout/layout-dir';
-@import './components/components-dir';
+@import './base/_base-dir';
+@import './abstracts/_abstract-dir';
+@import './style/_style.dir';
 
 //.autoprefixer-test { //test autoprefixer.
 //	user-select: none;

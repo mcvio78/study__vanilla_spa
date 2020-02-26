@@ -1,0 +1,36 @@
+:root {
+	font-family: 'Raleway', sans-serif;
+	/* $base-font-size: 16px !default; ( _variables.scss ) */
+	font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
+	line-height: calc(1.3em + (1.5 - 1.2) * ((100vw - 300px)/(1600 - 300)));
+}
+
+//*:not(.fa) {
+//	font-family: //your font-family;
+//},
+
+//*:not(i):not(.fa):not(.YourClassName) {
+//	font-family: //your font-family;
+//}
+
+/*
+*********************************************************************************
+ */
+
+//html {
+//font-size: 36px; //$base-font-size: 16px !default; ( _variables.scss )
+//font-family: 'Raleway', sans-serif;
+//padding: .1rem;
+//}
+
+//@media screen and (min-width: 320px) {
+//	html {
+//		font-size: calc(16px + 3 * ((100vw - 320px) / 680)); //default 16px + 6...
+//	}
+//}
+
+//@media screen and (min-width: 1700px) { //default 1000px
+//	html {
+//		font-size: 22px;
+//	}
+//}

@@ -1,0 +1,51 @@
+#home {
+	background-color: $secondary;
+
+	#navigationBar {
+		background-color: $primary;
+		color: $brightText;
+		padding: 1rem 0;
+
+		border: {
+			top-left-radius: 5px;
+			top-right-radius: 5px;
+		}
+
+		h1 {
+			text-align: center;
+			margin: 1rem 0;
+		}
+
+		.linksContainer { /* flex */
+			display: flex;
+			justify-content: center;
+			margin-bottom: 1rem;
+		}
+
+		a { /* items */
+			background-color: $brightText;
+			color: $darkText;
+			border-radius: 5px;
+			padding: .3rem;
+			margin: 0 .1rem;
+		}
+	}
+
+	#content {
+		padding: 2rem;
+
+		p {
+			margin: .3em 0;
+			text-align: center;
+
+			@extend %toolBelt;
+		}
+
+		a {
+			display: block;
+			text-align: center;
+			color: $darkText;
+			margin: .3em 0;
+		}
+	}
+}
