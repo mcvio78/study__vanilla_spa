@@ -23,11 +23,18 @@
 		}
 
 		a { /* items */
-			background-color: $brightText;
+			background-color: darken($primary, 10%);
 			color: $darkText;
 			border-radius: 5px;
-			padding: .3rem;
+			padding: .5rem 1rem;
 			margin: 0 .1rem;
+			text-align: center;
+
+			@extend %linkHover;
+		}
+
+		.active {
+			background-color: lighten($primary, 80%);
 		}
 	}
 
@@ -38,7 +45,7 @@
 			margin: .3em 0;
 			text-align: center;
 
-			@extend %toolBelt;
+			@include toolBelt;
 		}
 
 		a {

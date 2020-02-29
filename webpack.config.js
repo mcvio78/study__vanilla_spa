@@ -84,10 +84,13 @@ module.exports = {
 		}),
 		new HtmlWebpackPlugin({
 			filename: 'index.html',
-			template: 'src/index.html'
+			template: 'src/index.html',
+			minify: {
+				removeAttributeQuotes: false
+			}
 		}),
 		new CopyWebpackPlugin([
-			{ from: path.resolve(__dirname, 'src/sass/abstracts/fonts'), to: 'fonts' }
+			{ from: path.resolve(__dirname, 'src/sass/abstracts/font/fonts'), to: 'fonts' }
 		]),
 		new webpack.LoaderOptionsPlugin({
 			options: {
