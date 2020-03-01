@@ -1,0 +1,15 @@
+#error-page {
+	height: 80vh;
+	background-color: $errorBackground;
+	display: flex;
+	justify-content: center;
+
+	#content {
+		padding: 2rem;
+		text-align: center;
+	}
+
+	.material-icons {
+		font-size: 4rem;
+	}
+}

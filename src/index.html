@@ -4,20 +4,23 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="scripts/material-design-icons/iconfont/material-icons.css">
 	<title>SPA Project</title>
 </head>
 <body>
 
 	<!-- HTML HTML HTML HTML HTML HTML HTML HTML HTML HTML HTML HTML HTML HTML HTML HTML HTML HTML HTML HTML HTML HTML -->
-	<!------------------------------------------------------------------------------------------------------ Page Home -->
-	<div id="home">
+	<!------------------------------------------------------------------------------------------------------ container -->
+	<div>
 
-		<!--------------------------------------------------------------------------------------- Section navigation bar -->
+		<!----------------------------------------------------------------------------------------------- navigation bar -->
 		<div id="navigationBar">
 
-			<h1><i>Single Page App</i></h1>
+			<div id='titleContainer'>
+				<h1><i>Single Page App</i></h1>
+			</div>
 
-			<div class='linksContainer'>
+			<div id='linksContainer'>
 				<a class='item' href="/">
 					Currency Rates
 				</a>
@@ -32,15 +35,6 @@
 			</div>
 		</div>
 
-		<!--		&lt;!&ndash; Section content &ndash;&gt;--> <!-- Todo: Remove old code. -->
-		<!--		<div id='content'>-->
-
-		<!--			<p>this is the first sentence.</p>-->
-		<!--			<p>this is the second sentence.</p>-->
-		<!--			<p>this is the third sentence.</p>-->
-		<!--			<a href='#'>new link</a>-->
-		<!--		</div>-->
-
 		<!--------------------------------------------------------------------------------------------- Section App Root -->
 		<div id="app"></div>
 	</div>
@@ -50,27 +44,37 @@
 	<!------------------------------------------------------------------------------------------------------ TEMPLATES -->
 	<!-- Error Template -->
 	<script id="error-template" type="text/x-handlebars-template">
-		<div style="height:250px;">
-			<div class="content">{{title}} {{message}}</div>
+		<div id="error-page">
+			<div id='content'>
+					<i class="material-icons">error</i>
+					<h2>{{title}}</h2>
+				<p>{{message}}</p>
+			</div>
 		</div>
 	</script>
 
 	<!-- Currency Rates Template -->
 	<script id="rates-template" type="text/x-handlebars-template">
-		<h1 class="ui header">Currency Rates</h1>
-		<hr>
+		<div id="rates-page">
+			<h1>Currency Rates</h1>
+			<hr>
+		</div>
 	</script>
 
 	<!-- Exchange Conversion Template -->
 	<script id="exchange-template" type="text/x-handlebars-template">
-		<h1 class="ui header">Exchange Conversion</h1>
-		<hr>
+		<div id="exchange-page">
+			<h1>Exchange Conversion</h1>
+			<hr>
+		</div>
 	</script>
 
 	<!-- Historical Rates Template -->
 	<script id="historical-template" type="text/x-handlebars-template">
-		<h1 class="ui header">Historical Rates</h1>
-		<hr>
+		<div id="historical-page">
+			<h1>Historical Rates</h1>
+			<hr>
+		</div>
 	</script>
 
 	<!---------------------------------------------------------------------------------------- JS Library Dependencies -->
