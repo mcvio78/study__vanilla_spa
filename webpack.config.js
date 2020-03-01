@@ -92,6 +92,9 @@ module.exports = {
 		new CopyWebpackPlugin([
 			{ from: path.resolve(__dirname, 'src/sass/abstracts/font/fonts'), to: 'fonts' }
 		]),
+		new CopyWebpackPlugin([
+			{ from: path.resolve(__dirname, 'src/favicon.ico')}
+		]),
 		new webpack.LoaderOptionsPlugin({
 			options: {
 				postcss: [

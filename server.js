@@ -11,6 +11,38 @@ app.use(express.static('dist'));
 // Allow front-end access to node_modules folder
 app.use('/scripts', express.static(`${__dirname}/node_modules/`));
 
+
+// Express Error handler
+const errorHandler = (err, req, res) => {
+
+	if (err.response) {
+// The request was made and the server responded with a status code that falls out of the range of 2xx
+		res.status(403).send({ title: 'Server responded with an error', message: err.message });
+
+	} else if (err.request) {
+// The request was made but no response was received
+		res.status(503).send({ title: 'Unable to communicate with server', message: err.message });
+
+	} else {
+// Something happened in setting up the request that triggered an Error
+		res.status(500).send({ title: 'An unexpected error occurred', message: err.message });
+	}
+};
+
+
+// Fetch Latest Currency Rates
+app.get('/api/rates', async (req, res) => {
+	try {
+		const data = await getRates();
+// Otherwise browser guesses what type of content it will receive
+		res.setHeader('Content-Type', 'application/json');
+		res.send(data);
+	} catch (error) {
+		errorHandler(error, req, res);
+	}
+});
+
+
 // Redirect all traffic to index.html
 app.use((req, res) => res.sendFile(`${__dirname}/dist/index.html`));
 
@@ -19,11 +51,14 @@ app.listen(port, () => {
 	console.log('listening on %d', port);
 });
 
+
+// Test with async await
 // const test = async() => {
 // 	const data = await getRates();
 // 	console.log(data);
 // };
 
-getRates().then( response => {
-	console.log('response: ', response)
-});
+// Test with promise
+// getRates().then( response => {
+// 	console.log('response: ', response)
+// });

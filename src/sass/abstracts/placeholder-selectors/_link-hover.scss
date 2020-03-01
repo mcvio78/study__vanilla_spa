@@ -1,6 +1,6 @@
 %linkHover {
 	//font-size: 100%;
-	transition-duration: 1s;
+	transition-duration: .5s;
 
 	&:hover {
 		//font-size: 120%;
@@ -8,8 +8,8 @@
 		padding: .5rem 2rem;
 		box-shadow: .1rem .1rem .2rem $darkText;
 		font-weight: bold;
-		transition-duration: .5s;
-		transition-delay: .5s;
+		transition-duration: .3s;
+		transition-delay: .3s;
 	}
 }
 
