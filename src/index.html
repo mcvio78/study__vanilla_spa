@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="icon" href="favicon.ico" />
+	<link rel="icon" href="favicon.ico"/>
 	<link rel="stylesheet" href="scripts/material-design-icons/iconfont/material-icons.css">
 	<title>SPA Project</title>
 </head>
@@ -15,13 +15,13 @@
 	<div>
 
 		<!----------------------------------------------------------------------------------------------- navigation bar -->
-		<div id="navigationBar">
+		<div id="navigation-bar">
 
-			<div id='titleContainer'>
+			<div id='title-selection'>
 				<h1><i>Single Page App</i></h1>
 			</div>
 
-			<div id='linksContainer'>
+			<div id='links-selection'>
 				<a class='item' href="/">
 					Currency Rates
 				</a>
@@ -44,26 +44,88 @@
 
 	<!------------------------------------------------------------------------------------------------------ TEMPLATES -->
 	<!-- Error Template -->
-	<script id="error-template" type="text/x-handlebars-template">
-		<div id="error-page">
-			<div id='content'>
-					<i class="material-icons">error</i>
-					<h2>{{title}}</h2>
+	<script id="handlebars-error-template" type="text/x-handlebars-template">
+
+		<div id="error-page" class='server-works'>
+			<div id='description'>
+				<i class="material-icons">error</i>
+				<h2>{{title}}</h2>
 				<p>{{message}}</p>
+			</div>
+		</div>
+
+	</script>
+
+
+	<!-- Loader -->
+	<script id="handlebars-loader-template" type="text/x-handlebars-template">
+
+		<div id="loader-page">
+			<div id='loader-selection'>
+				<div class='loader'>
+					<p class='question-mark'>?</p>
+				</div>
+			</div>
+		</div>
+
+	</script>
+
+
+	<!-- Currency Rates Template -->
+	<script id="handlebars-rates-template" type="text/x-handlebars-template">
+
+		<div id="rates-page">
+			<div id='header'>
+				<h1>Currency Rates</h1>
+			</div>
+
+			<div id="info-date-base">
+				<div class="info-container">
+					<div class='icon-box'>
+						<i class="material-icons">event</i>
+					</div>
+					<div class='data-box'>
+						<p class="date-label">Date</p>
+						<i>{{date}}</i>
+					</div>
+				</div>
+
+				<div class="info-container">
+					<div class='icon-box'>
+						<i class="material-icons">euro_symbol</i>
+					</div>
+					<div class='data-box'>
+						<p class="base-label">Base</p>
+						<span>{{base}}</span>
+					</div>
+				</div>
+			</div>
+
+			<div id="code-rate-chart">
+				<table>
+					<thead>
+					<tr>
+						<th>Code</th>
+						<th>Rate</th>
+					</tr>
+					</thead>
+
+					<tbody>
+					{{#each rates}}
+					<tr>
+						<td>{{@key}}</td>
+						<td>{{this}}</td>
+					</tr>
+					{{/each}}
+					</tbody>
+				</table>
+
 			</div>
 		</div>
 	</script>
 
-	<!-- Currency Rates Template -->
-	<script id="rates-template" type="text/x-handlebars-template">
-		<div id="rates-page">
-			<h1>Currency Rates</h1>
-			<hr>
-		</div>
-	</script>
-
 	<!-- Exchange Conversion Template -->
-	<script id="exchange-template" type="text/x-handlebars-template">
+	<script id="handlebars-exchange-template" type="text/x-handlebars-template">
 		<div id="exchange-page">
 			<h1>Exchange Conversion</h1>
 			<hr>
@@ -71,7 +133,7 @@
 	</script>
 
 	<!-- Historical Rates Template -->
-	<script id="historical-template" type="text/x-handlebars-template">
+	<script id="handlebars-historical-template" type="text/x-handlebars-template">
 		<div id="historical-page">
 			<h1>Historical Rates</h1>
 			<hr>

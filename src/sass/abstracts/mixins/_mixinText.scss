@@ -2,7 +2,12 @@
 	box-sizing: border-box;
 	border-top: 1px rgba($darkText, .12) solid;
 	padding: 16px 0;
-	width: 100%;
+	background-color: darken($brightText, 30%);
+	//width: 100%;
 
-	&:hover { border: 2px rgba($darkText, .5) solid; }
+	&:hover {
+		//border: 0px rgba($darkText, .5) dashed;
+		background-color: lighten($darkText, 50%);
+		color: $brightText;
+	}
 }

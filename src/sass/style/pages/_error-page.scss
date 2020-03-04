@@ -1,10 +1,10 @@
 #error-page {
 	height: 80vh;
-	background-color: $errorBackground;
+
 	display: flex;
 	justify-content: center;
 
-	#content {
+	#description {
 		padding: 2rem;
 		text-align: center;
 	}
@@ -12,4 +12,12 @@
 	.material-icons {
 		font-size: 4rem;
 	}
+}
+
+.server-works{
+	background-color: $errorBackground;
+}
+
+.server-error {
+	background-color: $server-error-background;
 }

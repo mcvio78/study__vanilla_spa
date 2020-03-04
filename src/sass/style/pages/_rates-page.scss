@@ -1,0 +1,80 @@
+#rates-page {
+	height: 80vh;
+	background-color: $secondary;
+	display: flex;
+	align-items: flex-start;
+	flex-direction: column;
+
+	#header {
+		width: 100%;
+		text-align: center;
+		border-bottom: .1rem solid $darkText;
+	}
+
+	#info-date-base {
+		width: 100%;
+		background-color: lighten($brightText, 50%);
+		display: flex;
+		align-items: flex-start;
+
+		.info-container {
+			display: flex;
+			justify-items: flex-start;
+			align-items: center;
+			padding: 1rem;
+
+			.icon-box {
+				margin-right: 1rem;
+			}
+
+			.data-box {
+				.date-label {
+					display: block;
+					margin: 0;
+					font-weight: bold;
+				}
+
+				.base-label {
+					display: block;
+					margin: 0;
+					font-weight: bold;
+				}
+			}
+		}
+	}
+
+	#code-rate-chart {
+		width: 100%;
+
+		table {
+			width: 100%;
+
+			thead {
+				width: 100%;
+
+				tr {
+					th {
+						text-align: center;
+						width: 50%;
+
+						@include toolBelt;
+						border-top: 0;
+
+					}
+				}
+			}
+
+			tbody {
+				width: 100%;
+
+				tr {
+					td {
+						text-align: center;
+
+						@include toolBelt;
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,36 @@
+#loader-page {
+	#loader-selection {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 80vh;
+
+		.loader{
+			$size: 15rem;
+
+			width: $size;
+			height: $size;
+			border-radius: $size / 2;
+			background-color: $primary;
+
+			animation: rotation 2s infinite linear;
+
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			.question-mark{
+				font-size: 10rem;
+				font-weight: 900;
+			}
+		}
+	}
+	@keyframes rotation {
+		from {
+			-webkit-transform: rotate(0deg);
+		}
+		to {
+			-webkit-transform: rotate(359deg);
+		}
+	}
+}

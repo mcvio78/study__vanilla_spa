@@ -7,7 +7,7 @@
 		//background-color: darken($brightText, 30%);
 		padding: .5rem 2rem;
 		box-shadow: .1rem .1rem .2rem $darkText;
-		font-weight: bold;
+		color: lighten($darkText, 70%);
 		transition-duration: .3s;
 		transition-delay: .3s;
 	}

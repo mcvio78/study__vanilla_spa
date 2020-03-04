@@ -1,4 +1,4 @@
-#navigationBar {
+#navigation-bar {
 	background-color: $primary;
 	color: $brightText;
 	padding: 1rem 0;
@@ -9,14 +9,14 @@
 		top-right-radius: 5px;
 	}
 
-	#titleContainer {
+	#title-selection {
 		h1 {
 			text-align: center;
 			margin: 1rem 0;
 		}
 	}
 
-	#linksContainer { /* flex */
+	#links-selection { /* flex */
 		display: flex;
 		justify-content: center;
 		margin-bottom: 1rem;
