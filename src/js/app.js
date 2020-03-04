@@ -41,11 +41,11 @@ window.addEventListener('load', () => {
 	const showError = error => {
 
 		//----------------------------------------------------------------------------------------------ERROR HANDLER STEP 5
-		// error   --->   Error: Request failed with status code 500
+		// error   --->   Error: Request failed with status code 500   FROM res.status(500)
 
-		// error.response   --->  data: {title: "An unexpected error occurred", message: "invalid_base_currency"}
+		// error.response   --->  data: {title: "An unexpected error occurred", message: "invalid_base_currency"}   .send({ ... })
 
-		// error.response.data   --->   {title: "An unexpected error occurred", message: "invalid_base_currency"}
+		// error.response.data   --->   {title: "An unexpected error occurred", message: "invalid_base_currency"}   .send({ ... })
 
 		//---------------------------------------------------------------------DESTRUCTURING AND SEND IT INSIDE HANDLEBARS 6
 		const { title, message } = error.response.data;
@@ -71,7 +71,7 @@ window.addEventListener('load', () => {
 		el.html(loader);
 
 		try {
-			// Load Currency Ratesconst
+			// Load Currency Rates const
 			// Call PROXY SERVER = http://localhost:3000/
 			// Call APIs PROXY SERVER = http://localhost:3000/api ( in this case /rates )
 			const response = await api.get('/rates');

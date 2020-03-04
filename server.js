@@ -28,9 +28,10 @@ const errorHandler = (err, req, res) => {
 	} else {
 		// RETURN:  err: Error: invalid_base_currency   |||   err.message: invalid_base_currency
 
-		// Something happened in setting up the request that triggered an Error (es: data.error.code)
+		// Something happened in setting up the request that triggered an Error (es: data.error.type)
 		// NODE default error handler (err, req, res, next)
 		// NODE default returns:		Error: Request failed with status code 500
+		// It sends   1) res.status(500)   and   2) {title:..., message:...}
 		res.status(500).send({ title: 'An unexpected error occurred', message: err.message });
 	}
 };
@@ -46,7 +47,7 @@ app.get('/api/rates', async (req, res) => {
 		res.send(data);
 	} catch (error) {
 		//----------------------------------------------------------------------------------------------ERROR HANDLER STEP 2
-		// Catch error from fixer-service (else) throw new Error(data.error.type)
+		// Catch error from fixer-service (else) = throw new Error(data.error.type)
 		// Error: invalid_base_currency   <-Throwed error
 		errorHandler(error, req, res);
 	}
