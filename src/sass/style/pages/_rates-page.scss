@@ -68,6 +68,11 @@
 				width: 100%;
 
 				tr {
+					&:nth-child(even){
+						background-color: darken($brightText, 80%);
+						font-weight: bold;
+					}
+
 					td {
 						text-align: center;
 

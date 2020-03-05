@@ -1,6 +1,7 @@
 require('dotenv').config(); // read .env files
 const express = require('express');
-const { getRates } = require('./lib/fixer-service');
+const { getRates, getSymbols } = require('./lib/fixer-service');
+const { convertCurrency } = require('./lib/free-currency-service');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -53,6 +54,29 @@ app.get('/api/rates', async (req, res) => {
 	}
 });
 
+//---------------------------------------------------------------------------------------------------------FETCH SYMBOLS
+app.get('/api/symbols', async (req, res) => {
+	try{
+		const data = await getSymbols();
+		res.setHeader('Content-Type', 'application/json');
+		res.send(data);
+	} catch(error) {
+		errorHandler(error, req, res);
+	}
+});
+
+//------------------------------------------------------------------------------------------------------CONVERT CURRENCY
+app.post('/api/convert', async (req, res) => {
+	try {
+		const { from , to } = req.body;
+		const data = await convertCurrency(from, to);
+		res.setHeader('Content-Type', 'application/json');
+		res.send(data);
+	} catch (error) {
+		errorHandler(error, req, res);
+	}
+});
+
 // Redirect all traffic to index.html
 app.use((req, res) => res.sendFile(`${__dirname}/dist/index.html`));
 
@@ -61,6 +85,7 @@ app.listen(port, () => {
 	console.log('listening on %d', port);
 });
 
+//---------------------------------------------------------------------------------------------------------TEST GETRATES
 // Test with async await
 // const test = async() => {
 // 	const data = await getRates();
@@ -71,3 +96,17 @@ app.listen(port, () => {
 // getRates().then( response => {
 // 	console.log('response: ', response)
 // });
+
+//-------------------------------------------------------------------------------------------------------TEST GETSYMBOLS
+// Test Symbols Endpoint
+// const test = async() => {
+// 	const data = await getSymbols();
+// 	console.log(data.symbols);
+// }
+
+//------------------------------------------------------------------------------------TEST CURRENCY CONVERSION ENDPOINTS
+// Test Currency Conversion Endpoint
+// const test = async() => {
+// 	const data = await convertCurrency('USD', 'KES');
+// 	console.log(data);
+// };
