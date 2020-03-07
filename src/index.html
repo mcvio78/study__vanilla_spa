@@ -17,11 +17,11 @@
 		<!----------------------------------------------------------------------------------------------- navigation bar -->
 		<div id="navigation-bar">
 
-			<div id='title-selection'>
+			<div class='title'>
 				<h1><i>Single Page App</i></h1>
 			</div>
 
-			<div id='links-selection'>
+			<div class='links'>
 				<a class='item' href="/">
 					Currency Rates
 				</a>
@@ -47,7 +47,7 @@
 	<script id="handlebars-error-template" type="text/x-handlebars-template">
 
 		<div id="error-page" class='server-works'>
-			<div id='description'>
+			<div id='description-section'>
 				<i class="material-icons">error</i>
 				<h2>{{title}}</h2>
 				<p>{{message}}</p>
@@ -61,7 +61,7 @@
 	<script id="handlebars-loader-template" type="text/x-handlebars-template">
 
 		<div id="loader-page">
-			<div id='loader-selection'>
+			<div id='loader-section'>
 				<div class='loader'>
 					<p class='question-mark'>?</p>
 				</div>
@@ -75,60 +75,129 @@
 	<script id="handlebars-rates-template" type="text/x-handlebars-template">
 
 		<div id="rates-page">
-			<div id='header'>
+			<div id='rates-header'>
 				<h1>Currency Rates</h1>
 			</div>
 
-			<div id="info-date-base">
-				<div class="info-container">
-					<div class='icon-box'>
-						<i class="material-icons">event</i>
+			<div class id='rates-content'>
+				<div class="info-date-base">
+					<div class="info-container">
+						<div class='icon-box'>
+							<i class="material-icons">event</i>
+						</div>
+						<div class='data-box'>
+							<p class="date-label">Date</p>
+							<i>{{date}}</i>
+						</div>
 					</div>
-					<div class='data-box'>
-						<p class="date-label">Date</p>
-						<i>{{date}}</i>
+
+					<div class="info-container">
+						<div class='icon-box'>
+							<i class="material-icons">euro_symbol</i>
+						</div>
+						<div class='data-box'>
+							<p class="base-label">Base</p>
+							<span>{{base}}</span>
+						</div>
 					</div>
 				</div>
 
-				<div class="info-container">
-					<div class='icon-box'>
-						<i class="material-icons">euro_symbol</i>
-					</div>
-					<div class='data-box'>
-						<p class="base-label">Base</p>
-						<span>{{base}}</span>
-					</div>
+				<div class="code-rate-chart">
+					<table>
+						<thead>
+						<tr>
+							<th>Code</th>
+							<th>Rate</th>
+						</tr>
+						</thead>
+
+						<tbody>
+						{{#each rates}}
+						<tr>
+							<td>{{@key}}</td>
+							<td>{{this}}</td>
+						</tr>
+						{{/each}}
+						</tbody>
+					</table>
+
 				</div>
-			</div>
-
-			<div id="code-rate-chart">
-				<table>
-					<thead>
-					<tr>
-						<th>Code</th>
-						<th>Rate</th>
-					</tr>
-					</thead>
-
-					<tbody>
-					{{#each rates}}
-					<tr>
-						<td>{{@key}}</td>
-						<td>{{this}}</td>
-					</tr>
-					{{/each}}
-					</tbody>
-				</table>
-
 			</div>
 		</div>
 	</script>
 
 	<!-- Exchange Conversion Template -->
 	<script id="handlebars-exchange-template" type="text/x-handlebars-template">
+
 		<div id="exchange-page">
-			<h1>Exchange Conversion</h1>
-			<hr>
+
+			<div id='exchange-header'>
+				<h1 class="">Exchange Rate</h1>
+			</div>
+
+			<div id='exchange-content'>
+
+				<form class="form-selection" name='exchange_form'>
+
+					<div class="three-fields">
+
+						<div class="field">
+							<!-- Selection no needs label -->
+							<label>From</label>
+							<select class="dropdown" name="from">
+								<!-- First option 'Select Currency with value empty' -->
+								<option value="">Select Currency</option>
+
+								<!-- Loop through each symbols with HANDLEBARS -->
+								<!-- {{#each array}} {{@index}}: {{this}} {{/each}} ARRAY ITERATION-->
+								<!-- {{#each object}} {{@key}}: {{this}} {{/each}} OBJECT ITERATION-->
+								{{#each symbols}}
+								<option value="{{@key}}">{{this}}</option>
+								{{/each}}
+
+							</select>
+						</div>
+
+						<div class="field">
+							<!-- Selection no needs label -->
+							<label>To</label>
+							<select class="dropdown" name="to">
+								<!-- First option 'Select Currency with value empty' -->
+								<option class='dropdown-label' value="">Select Currency</option>
+
+								{{#each symbols}}
+								<option value="{{@key}}">{{this}}</option>
+								{{/each}}
+
+							</select>
+						</div>
+
+						<div class="field">
+							<label>Amount</label>
+							<input class='amount' pattern="[0-9]*" type="number" name="amount" placeholder="Enter amount">
+						</div>
+
+						<div class='field'>
+						<button type="submit" value="Submit" class="submit-button">Convert</button>
+						</div>
+
+					</div>
+
+					<div class="error-modal">
+						<p class='error-notification'></p>
+						<button class='close-modal'>Close</button>
+					</div>
+				</form>
+				<!--				<br>-->
+				<!--				<div id="result-segment" class="ui center aligned segment">-->
+				<!--					<h2 id="result" class="ui header">-->
+				<!--						0.00-->
+				<!--					</h2>-->
+				<!--				</div>-->
+
+
+			</div>
+
 		</div>
 	</script>
 
@@ -142,7 +211,7 @@
 
 	<!---------------------------------------------------------------------------------------- JS Library Dependencies -->
 	<!--	<script src="scripts/jquery/dist/jquery.min.js"></script>-->
-	<!--	<script src="scripts/semantic-ui-css/semantic.min.js"></script>-->
+	<!--	<script src="scripts/ -css/semantic.min.js"></script>-->
 	<script src="scripts/axios/dist/axios.min.js"></script>
 	<script src="scripts/handlebars/dist/handlebars.min.js"></script>
 	<script src="scripts/vanilla-router/dist/vanilla-router.min.js"></script>
