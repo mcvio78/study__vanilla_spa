@@ -4,7 +4,7 @@
 	display: flex;
 	justify-content: center;
 
-	#description {
+	#description-section {
 		padding: 2rem;
 		text-align: center;
 	}
@@ -15,9 +15,10 @@
 }
 
 .server-works{
-	background-color: $errorBackground;
+	background-color: $alert-color;
 }
 
 .server-error {
 	background-color: $server-error-background;
+	color: $brightText;
 }

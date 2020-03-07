@@ -1,82 +1,89 @@
 #rates-page {
 	height: 80vh;
-	background-color: $secondary;
+	//background-color: $secondary;
 	display: flex;
 	align-items: flex-start;
 	flex-direction: column;
 
-	#header {
+	#rates-header {
 		width: 100%;
 		text-align: center;
 		border-bottom: .1rem solid $darkText;
 	}
 
-	#info-date-base {
+	#rates-content {
 		width: 100%;
-		background-color: darken($brightText, 12%);
-		display: flex;
-		align-items: flex-start;
 
-		.info-container {
+		.info-date-base {
+			background-color: darken($brightText, 12%);
 			display: flex;
-			justify-items: flex-start;
-			align-items: center;
-			padding: 1rem;
+			align-items: flex-start;
 
-			.icon-box {
-				margin-right: 1rem;
-			}
+			.info-container {
+				display: flex;
+				justify-items: flex-start;
+				align-items: center;
+				padding: 1rem;
 
-			.data-box {
-				.date-label {
-					display: block;
-					margin: 0;
-					font-weight: bold;
+				.icon-box {
+					margin-right: 1rem;
 				}
 
-				.base-label {
-					display: block;
-					margin: 0;
-					font-weight: bold;
-				}
-			}
-		}
-	}
-
-	#code-rate-chart {
-		width: 100%;
-
-		table {
-			width: 100%;
-
-			thead {
-				width: 100%;
-
-				tr {
-					th {
-						text-align: center;
-						width: 50%;
-
-						@include toolBelt;
-						border-top: 0;
-
-					}
-				}
-			}
-
-			tbody {
-				width: 100%;
-
-				tr {
-					&:nth-child(even){
-						background-color: darken($brightText, 80%);
+				.data-box {
+					.date-label {
+						display: block;
+						margin: 0;
 						font-weight: bold;
 					}
 
-					td {
-						text-align: center;
+					.base-label {
+						display: block;
+						margin: 0;
+						font-weight: bold;
+					}
+				}
+			}
+		}
 
-						@include toolBelt;
+		.code-rate-chart {
+			width: 100%;
+
+			table {
+				width: 100%;
+
+				thead {
+					width: 100%;
+
+					tr {
+						th {
+							text-align: center;
+							width: 50%;
+							font-weight: 500;
+							background-color: darken($secondary, 50%);
+							color: $brightText;
+
+							@include toolBelt;
+
+							border-top: 0;
+						}
+					}
+				}
+
+				tbody {
+					width: 100%;
+					background-color: darken($secondary, 10%);
+
+					tr {
+						&:nth-child(even) {
+							//font-weight: bold;
+							background-color: darken($secondary, 20%);
+						}
+
+						td {
+							text-align: center;
+
+							@include toolBelt;
+						}
 					}
 				}
 			}

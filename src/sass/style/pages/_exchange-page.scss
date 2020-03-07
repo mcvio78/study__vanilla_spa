@@ -1,0 +1,90 @@
+#exchange-page {
+	height: 80vh;
+	background-color: $secondary;
+	display: flex;
+	align-items: flex-start;
+	flex-direction: column;
+
+	#exchange-header {
+		width: 100%;
+		text-align: center;
+		border-bottom: .1rem solid $darkText;
+		background-color: $brightText;
+	}
+
+	#exchange-content {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+
+		.form-selection {
+			.three-fields {
+				padding-top: 16px;
+
+				.field {
+					display: flex;
+					flex-direction: column;
+					padding: 1rem;
+
+					label {
+						font-size: 1.2rem;
+						font-weight: bold;
+						text-align: center;
+						margin-bottom: .5rem;
+					}
+
+					select {
+						height: 40px;
+					}
+
+					.amount {
+						height: 40px;
+						text-align: center;
+					}
+
+					.submit-button {
+						$size: 5rem;
+
+						width: $size;
+						height: $size;
+						border-radius: $size / 5;
+						margin: 0 auto;
+						outline:none;
+					}
+				}
+			}
+		}
+
+		.error-modal {
+			$size: 70%;
+
+			width: $size;
+			height: $size / 2;
+			border-radius: $size / 40;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			background-color: $alert-color;
+			display: none;
+
+			.error-notification {
+				text-align: center;
+				font-size: 2rem;
+			}
+			.close-modal {
+				$size: 5rem;
+
+				width: $size  * 1.5;
+				height: $size;
+				border-radius: $size / 5;
+
+				position: absolute;
+				bottom: 5%;
+				left: 50%;
+				transform: translateX(-50%);
+				outline:none;
+			}
+		}
+	}
+}
