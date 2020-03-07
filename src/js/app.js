@@ -16,6 +16,9 @@ window.addEventListener('load', () => {
 	// const html = ratesTemplate();
 	// el.html(html);
 
+	//--------------------------------------------------------------------------------------------------------------LOADER
+	const loader = loaderTemplate();
+
 	// Router Declaration
 	const router = new Router({ /* eslint-disable-line */
 		mode: 'history',
@@ -67,7 +70,6 @@ window.addEventListener('load', () => {
 		let html = ratesTemplate();
 
 		// McFix try to avoid fouc.
-		let loader = loaderTemplate();
 		el.html(loader);
 
 		try {
@@ -95,9 +97,168 @@ window.addEventListener('load', () => {
 		}
 	});
 
-	router.add('/exchange', () => {
-		let html = exchangeTemplate();
-		el.html(html);
+	// // Perform POST request, calculate and display conversion results
+	// const getConversionResults = async () => {
+	//
+	// 	// Extract form data
+	// 	const from = $('#from').val();
+	// 	const to = $('#to').val();
+	// 	const amount = $('#amount').val();
+	//
+	// 	// Send post data to Express(proxy) server
+	// 	try {
+	// 		const response = await api.post('/convert', { from, to });
+	// 		const { rate } = response.data;
+	// 		const result = rate * amount;
+	// 		$('#result').html(`${to} ${result}`);
+	// 	} catch (error) {
+	// 		showError(error);
+	// 	} finally {
+	// 		el.html(html);
+	// 	}
+	// };
+
+	// Handle Convert Button Click Event
+	const convertRatesHandler = () => {
+
+		// Specify Form Validation Rules
+		const validateForm = () => {
+			const from = document.forms.exchange_form.from;
+			const to = document.forms.exchange_form.to;
+			const amount = document.forms.exchange_form.amount;
+			const amountValue = amount.value;
+
+			const re = new RegExp('[0][0-9]', 'g');
+
+			const errorModal = $('.error-modal');
+			errorModal.css('display','inline-block');
+			const errorNotification = $('.error-notification');
+			const closeModal = $('.close-modal');
+
+			closeModal.click(event => {
+				event.preventDefault();
+				errorModal.css('display','none');
+			});
+
+			if (from.value === '') {
+				errorNotification.text('from must be filled out');
+				//alert('from must be filled out');
+				return false;
+			}
+			if (to.value === '') {
+				errorNotification.text('to must be filled out');
+				//alert('to must be filled out');
+				return false;
+			}
+			if(amountValue <= 0){
+				errorNotification.text('amount must be filled out with a number greater than zero');
+				//alert('amount must be filled out with a number greater than zero');
+				return false;
+			}
+			if(amountValue.match(re)){
+				errorNotification.text('amount can\'t start with zero');
+				//alert('amount can\'t start with zero');
+				return false;
+			}
+			if (amountValue - Math.floor(Number(amountValue)) !== 0 ) {
+				errorNotification.text('amount must be decimal');
+				//alert('amount must be decimal');
+				return false;
+			}
+			errorModal.css('display','none');
+			return true;
+		};
+
+		const validateResult = validateForm();
+
+		if (validateResult) {
+
+			// hide error message
+			// $('.ui.error.message').hide();
+
+			//$('#result-segment').addClass('loading');
+			el.html(loader);
+			// Post to express server
+			//getConversionResults();
+
+			// Prevent page from submitting to server
+			return false;
+
+		}
+		return true;
+	};
+
+	/**
+	 *******************************************************************************************************EXCHANGE RATES
+	 */
+	router.add('/exchange', async() => {
+
+		// McFix try to avoid fouc.
+		el.html(loader);
+
+		try {
+			// Load Symbols
+			const response = await api.get('/symbols');
+			// {
+			// 	"success": true,
+			// 	"symbols": {
+			// 	"AED": "United Arab Emirates Dirham",
+			// 		"AFN": "Afghan Afghani",
+			// 		"ALL": "Albanian Lek",
+			// 		"AMD": "Armenian Dram",
+			// 	}
+			// }
+			const { symbols } = response.data;
+			const html = exchangeTemplate({ symbols });
+			el.html(html);
+
+			// Reset fields
+			document.forms.exchange_form.from = '';
+			document.forms.exchange_form.to = '';
+			document.forms.exchange_form.amount = '';
+
+			// // Specify Form Validation Rules
+			// 	const validateForm = () => {
+			// 		const from = document.forms.exchange_form.from;
+			// 		const to = document.forms.exchange_form.to;
+			// 		const amount = document.forms.exchange_form.amount;
+			// 		// const amountNumericValue = parseInt(amount.value) || 0;
+			// 		const amountValue = amount.value;
+			//
+			// 		const re = new RegExp('[0][0-9]', 'g');
+			//
+			// 		if (from.value === '') {
+			// 			alert('from must be filled out');
+			// 			return false;
+			// 		}
+			// 		if (to.value === '') {
+			// 			alert('to must be filled out');
+			// 			return false;
+			// 		}
+			// 		if(amountValue <= 0){
+			// 			alert('amount must be filled out with a number greater than zero');
+			// 			return false;
+			// 		}
+			// 		if(amountValue.match(re)){
+			// 			alert('amount can\'t start with zero');
+			// 			return false;
+			// 		}
+			// 		if (amountValue - Math.floor(Number(amountValue)) !== 0 ) {
+			// 			alert('amount must be decimal');
+			// 			return false;
+			// 		}
+			// 		return true;
+			// };
+
+			// Specify Submit Handler
+			$('.submit-button').click(event => {
+				event.preventDefault();
+				convertRatesHandler();
+			});
+		} catch (error) {
+			showError(error);
+		}
+
 	});
 
 	router.add('/historical', () => {
