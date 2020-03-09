@@ -131,7 +131,7 @@ window.addEventListener('load', () => {
 			const re = new RegExp('[0][0-9]', 'g');
 
 			const errorModal = $('.error-modal');
-			errorModal.css('display','inline-block');
+			errorModal.css('display','flex');
 			const errorNotification = $('.error-notification');
 			const closeModal = $('.close-modal');
 
@@ -173,11 +173,14 @@ window.addEventListener('load', () => {
 
 		if (validateResult) {
 
+			// Hide error notification modal
 			// hide error message
 			// $('.ui.error.message').hide();
 
+			// Loader
 			//$('#result-segment').addClass('loading');
 			el.html(loader);
+
 			// Post to express server
 			//getConversionResults();
 
@@ -217,39 +220,6 @@ window.addEventListener('load', () => {
 			document.forms.exchange_form.to = '';
 			document.forms.exchange_form.amount = '';
 
-			// // Specify Form Validation Rules
-			// 	const validateForm = () => {
-			// 		const from = document.forms.exchange_form.from;
-			// 		const to = document.forms.exchange_form.to;
-			// 		const amount = document.forms.exchange_form.amount;
-			// 		// const amountNumericValue = parseInt(amount.value) || 0;
-			// 		const amountValue = amount.value;
-			//
-			// 		const re = new RegExp('[0][0-9]', 'g');
-			//
-			// 		if (from.value === '') {
-			// 			alert('from must be filled out');
-			// 			return false;
-			// 		}
-			// 		if (to.value === '') {
-			// 			alert('to must be filled out');
-			// 			return false;
-			// 		}
-			// 		if(amountValue <= 0){
-			// 			alert('amount must be filled out with a number greater than zero');
-			// 			return false;
-			// 		}
-			// 		if(amountValue.match(re)){
-			// 			alert('amount can\'t start with zero');
-			// 			return false;
-			// 		}
-			// 		if (amountValue - Math.floor(Number(amountValue)) !== 0 ) {
-			// 			alert('amount must be decimal');
-			// 			return false;
-			// 		}
-			// 		return true;
-			// };
-
 			// Specify Submit Handler
 			$('.submit-button').click(event => {
 				event.preventDefault();
@@ -258,7 +228,6 @@ window.addEventListener('load', () => {
 		} catch (error) {
 			showError(error);
 		}
-
 	});
 
 	router.add('/historical', () => {
