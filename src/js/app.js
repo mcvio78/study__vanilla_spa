@@ -16,7 +16,9 @@ window.addEventListener('load', () => {
 	// const html = ratesTemplate();
 	// el.html(html);
 
-	//--------------------------------------------------------------------------------------------------------------LOADER
+	/**
+	 ***************************************************************************************************************LOADER
+	 */
 	const loader = loaderTemplate();
 
 	// Router Declaration
@@ -33,6 +35,9 @@ window.addEventListener('load', () => {
 		},
 	});
 
+	/**
+	 ******************************************************************************************************************API
+	 */
 	// Instantiate api handler
 	// API client for communicating with our proxy server [(2)proxy server]
 	const api = axios.create({ /* eslint-disable-line */
@@ -91,110 +96,116 @@ window.addEventListener('load', () => {
 			// error = Error: Request failed with status code 500 because ( res.status(500).send({ title:... )
 			showError(error);
 		} finally {
-
 			// Remove loader status
 			//$('.loading').removeClass('loading');
 		}
 	});
 
-	// // Perform POST request, calculate and display conversion results
-	// const getConversionResults = async () => {
-	//
-	// 	// Extract form data
-	// 	const from = $('#from').val();
-	// 	const to = $('#to').val();
-	// 	const amount = $('#amount').val();
-	//
-	// 	// Send post data to Express(proxy) server
-	// 	try {
-	// 		const response = await api.post('/convert', { from, to });
-	// 		const { rate } = response.data;
-	// 		const result = rate * amount;
-	// 		$('#result').html(`${to} ${result}`);
-	// 	} catch (error) {
-	// 		showError(error);
-	// 	} finally {
-	// 		el.html(html);
-	// 	}
-	// };
-
-	// Handle Convert Button Click Event
-	const convertRatesHandler = () => {
-
-		// Specify Form Validation Rules
-		const validateForm = () => {
-			const from = document.forms.exchange_form.from;
-			const to = document.forms.exchange_form.to;
-			const amount = document.forms.exchange_form.amount;
-			const amountValue = amount.value;
-
-			const re = new RegExp('[0][0-9]', 'g');
-
-			const errorModal = $('.error-modal');
-			errorModal.css('display','flex');
-			const errorNotification = $('.error-notification');
-			const closeModal = $('.close-modal');
-
-			closeModal.click(event => {
-				event.preventDefault();
-				errorModal.css('display','none');
-			});
-
-			if (from.value === '') {
-				errorNotification.text('from must be filled out');
-				//alert('from must be filled out');
-				return false;
-			}
-			if (to.value === '') {
-				errorNotification.text('to must be filled out');
-				//alert('to must be filled out');
-				return false;
-			}
-			if(amountValue <= 0){
-				errorNotification.text('amount must be filled out with a number greater than zero');
-				//alert('amount must be filled out with a number greater than zero');
-				return false;
-			}
-			if(amountValue.match(re)){
-				errorNotification.text('amount can\'t start with zero');
-				//alert('amount can\'t start with zero');
-				return false;
-			}
-			if (amountValue - Math.floor(Number(amountValue)) !== 0 ) {
-				errorNotification.text('amount must be decimal');
-				//alert('amount must be decimal');
-				return false;
-			}
-			errorModal.css('display','none');
-			return true;
-		};
-
-		const validateResult = validateForm();
-
-		if (validateResult) {
-
-			// Hide error notification modal
-			// hide error message
-			// $('.ui.error.message').hide();
-
-			// Loader
-			//$('#result-segment').addClass('loading');
-			el.html(loader);
-
-			// Post to express server
-			//getConversionResults();
-
-			// Prevent page from submitting to server
-			return false;
-
-		}
-		return true;
-	};
-
 	/**
 	 *******************************************************************************************************EXCHANGE RATES
 	 */
 	router.add('/exchange', async() => {
+
+		// Handle Convert Button Click Event
+		const convertRatesHandler = () => {
+
+			// Form fields variables
+			const from = document.forms['exchange_form']['from'].value;
+			const to = document.forms['exchange_form']['to'].value;
+			const amount = document.forms['exchange_form']['amount'].value;
+
+			console.log('from: ', from);
+			console.log('to: ', to);
+			console.log('amount: ', amount);
+
+			// Perform POST request, calculate and display conversion results
+			const getConversionResults = async () => {
+
+				// Send post data to Express(proxy) server
+				try {
+					const response = await api.post('/convert', { from, to });
+					const { rate } = response.data;
+					const result = rate * amount;
+
+					$('.result-value').html(`${to} ${result}`);
+				} catch (error) {
+					showError(error);
+				} finally {
+					// Remove loader status
+					//el.html(html);
+					$('.loading-time-conversion-container').css('display','none');
+				}
+			};
+
+			// Specify Form Validation Rules
+			const validateForm = () => {
+				// const from = document.forms.exchange_form.from;
+				// const to = document.forms.exchange_form.to;
+				// const amount = document.forms.exchange_form.amount;
+				// const amountValue = amount.value;
+
+				const re = new RegExp('[0][0-9]', 'g');
+
+				const errorModal = $('.error-modal');
+				errorModal.css('display','flex');
+				const errorNotification = $('.error-notification');
+				const closeModal = $('.close-modal');
+
+				closeModal.click(event => {
+					event.preventDefault();
+					errorModal.css('display','none');
+				});
+
+				if (from === '') {
+					errorNotification.text('from must be filled out');
+					//alert('from must be filled out');
+					return false;
+				}
+				if (to === '') {
+					errorNotification.text('to must be filled out');
+					//alert('to must be filled out');
+					return false;
+				}
+				if(amount <= 0){
+					errorNotification.text('amount must be filled out with a number greater than zero');
+					//alert('amount must be filled out with a number greater than zero');
+					return false;
+				}
+				if(amount.match(re)){
+					errorNotification.text('amount can\'t start with zero');
+					//alert('amount can\'t start with zero');
+					return false;
+				}
+				if (amount - Math.floor(Number(amount)) !== 0 ) {
+					errorNotification.text('amount must be decimal');
+					//alert('amount must be decimal');
+					return false;
+				}
+				errorModal.css('display','none');
+				return true;
+			};
+
+			const validateResult = validateForm();
+
+			if (validateResult) {
+
+				// Hide error notification modal (no UI.. so we don't need it)
+				// hide error message
+				// $('.ui.error.message').hide();
+
+				// Loader
+				//$('#result-segment').addClass('loading');
+				//el.html(loader);
+				$('.loading-time-conversion-container').css('display','flex');
+
+				// Post to express server
+				getConversionResults();
+
+				// Prevent page from submitting to server
+				return false;
+			}
+			return true;
+		};
 
 		// McFix try to avoid fouc.
 		el.html(loader);
@@ -230,12 +241,19 @@ window.addEventListener('load', () => {
 		}
 	});
 
+	/**
+	 *****************************************************************************************************HISTORICAL RATES
+	 */
 	router.add('/historical', () => {
 		let html = historicalTemplate();
 		el.html(html);
 	});
 
+	/**
+	 *******************************************************************************************************NAVIGATION BAR
+	 */
 	// Navigate app to current url(pathname = /, /exchange, /historical)
+	// We must use it here because of redirect
 	router.navigateTo(window.location.pathname);
 
 	// Highlight Active Menu on Refresh/Page Reload
