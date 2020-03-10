@@ -1,6 +1,6 @@
 require('dotenv').config(); // read .env files
 const express = require('express');
-const { getRates, getSymbols } = require('./lib/fixer-service');
+const { getRates, getSymbols, getHistoricalRate } = require('./lib/fixer-service');
 const { convertCurrency } = require('./lib/free-currency-service');
 const bodyParser = require('body-parser');
 
@@ -64,7 +64,9 @@ app.get('/api/rates', async (req, res) => {
 	}
 });
 
-//---------------------------------------------------------------------------------------------------------FETCH SYMBOLS
+/**
+ **********************************************************************************************************FETCH SYMBOLS
+ */
 app.get('/api/symbols', async (req, res) => {
 	try{
 		const data = await getSymbols();
@@ -75,11 +77,28 @@ app.get('/api/symbols', async (req, res) => {
 	}
 });
 
-//------------------------------------------------------------------------------------------------------CONVERT CURRENCY
+/**
+********************************************************************************************************CONVERT CURRENCY
+*/
 app.post('/api/convert', async (req, res) => {
 	try {
 		const { from , to } = req.body;
 		const data = await convertCurrency(from, to);
+		res.setHeader('Content-Type', 'application/json');
+		res.send(data);
+	} catch (error) {
+		errorHandler(error, req, res);
+	}
+});
+
+/**
+ * *****************************************************************************************************HISTORICAL RATES
+ */
+// Fetch Currency Rates by date
+app.post('/api/historical', async (req, res) => {
+	try {
+		const { date } = req.body;
+		const data = await getHistoricalRate(date);
 		res.setHeader('Content-Type', 'application/json');
 		res.send(data);
 	} catch (error) {
@@ -120,3 +139,10 @@ app.listen(port, () => {
 // 	const data = await convertCurrency('USD', 'KES');
 // 	console.log(data);
 // };
+
+//------------------------------------------------------------------------------------------------------HISTORICAL RATES
+// const test = async() => {
+// 	const data = await getHistoricalRate('2012-07-14');
+// 	console.log(data);
+// };
+// test();

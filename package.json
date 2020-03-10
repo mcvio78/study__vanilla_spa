@@ -32,6 +32,8 @@
 		"handlebars": "^4.7.3",
 		"jquery": "^3.4.1",
 		"material-design-icons": "^3.0.1",
+		"moment": "^2.24.0",
+		"pikaday": "^1.8.0",
 		"vanilla-router": "^1.2.7"
 	},
 	"devDependencies": {

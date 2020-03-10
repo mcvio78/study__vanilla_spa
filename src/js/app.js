@@ -114,10 +114,6 @@ window.addEventListener('load', () => {
 			const to = document.forms['exchange_form']['to'].value;
 			const amount = document.forms['exchange_form']['amount'].value;
 
-			console.log('from: ', from);
-			console.log('to: ', to);
-			console.log('amount: ', amount);
-
 			// Perform POST request, calculate and display conversion results
 			const getConversionResults = async () => {
 
@@ -232,7 +228,7 @@ window.addEventListener('load', () => {
 			document.forms.exchange_form.amount = '';
 
 			// Specify Submit Handler
-			$('.submit-button').click(event => {
+			$('#exchange-page > #exchange-content > .form-selection > .three-fields > .field > .submit-button').click(event => {
 				event.preventDefault();
 				convertRatesHandler();
 			});
@@ -244,10 +240,92 @@ window.addEventListener('load', () => {
 	/**
 	 *****************************************************************************************************HISTORICAL RATES
 	 */
+
+		// Call fixer-service which use historical API
+		const getHistoricalRates = async formDateField => {
+		// 	const date = $('#datepicker').val();
+
+		const date = formDateField;
+
+			try {
+				const response = await api.post('/historical', { date });
+				const { base, rates } = response.data;
+
+				// Reuse rates template
+				const html = ratesTemplate({ base, date, rates });
+				//$('#handlebars-historical-template').html(html);
+				el.html(html);
+
+			} catch (error) {
+				showError(error);
+
+			} finally {
+
+				//$('.segment').removeClass('loading');
+				$('#historical-page > #historical-content > .loading-time-conversion-container').css('display','none');
+			}
+		};
+
+		const historicalRatesHandler = formDateField => {
+
+			const errorModal = $('#historical-page > #historical-content > .form-selection > .error-modal');
+			const errorNotification = $('#historical-page > #historical-content > .form-selection > .error-modal > .error-notification');
+			const closeModal = $('#historical-page > #historical-content > .form-selection > .error-modal > .close-modal');
+
+			closeModal.click(event => {
+				event.preventDefault();
+				errorModal.css('display','none');
+			});
+
+			if (formDateField.length !== 0) {
+				// // hide error message
+				// $('.ui.error.message').hide();
+				//
+				// // Indicate loading status
+				// $('.segment').addClass('loading');
+				$('#historical-page > #historical-content > .loading-time-conversion-container').css('display','flex');
+				getHistoricalRates(formDateField);
+
+				// Prevent page from submitting to server
+				return false;
+			}
+			errorModal.css('display','flex');
+			errorNotification.text('The date should be chosen');
+			return true;
+		};
+
 	router.add('/historical', () => {
-		let html = historicalTemplate();
-		el.html(html);
-	});
+
+			// Display form
+			const html = historicalTemplate();
+			el.html(html);
+
+			// 	// Activate Date Picker
+			// $('#calendar').calendar({
+			// 	type: 'date',
+			// 	formatter: { //format date to yyyy-mm-dd
+			// 		date: date => new Date(date).toISOString().split('T')[0],
+			// 	},
+			// });
+
+			// Initialize Pikaday
+			const picker = new Pikaday({ /* eslint-disable-line */
+				field: document.getElementById('datepicker'),
+				format: 'YYYY-MM-DD',
+			});
+
+			// // Validate Date input
+			// $('.ui.form').form({
+			// 	fields: {
+			// 		date: 'empty',
+			// 	},
+			// });
+
+			$('#historical-page > #historical-content > .form-selection > .field > .submit-button').click(event => {
+				event.preventDefault();
+				historicalRatesHandler(picker.toString());
+			});
+		});
 
 	/**
 	 *******************************************************************************************************NAVIGATION BAR
