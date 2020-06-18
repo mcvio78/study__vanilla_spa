@@ -16,7 +16,7 @@ app.use('/scripts', express.static(`${__dirname}/node_modules/`));
 /** Place this code right before the error handler function **/
 // Parse POST data as URL encoded data
 app.use(bodyParser.urlencoded({
-	extended: true,
+  extended: true,
 }));
 
 // Parse POST data as JSON
@@ -26,69 +26,78 @@ app.use(bodyParser.json());
 //--------------------------------------------------------------------------------------------------ERROR HANDLER STEP 3
 const errorHandler = (err, req, res) => {
 
-	if (err.response) {
+  if (err.response) {
 
-		// The request was made and the server responded with a status code that falls out of the range of 2xx
-		res.status(403).send({ title: 'Server responded with an error', message: err.message });
+    // The request was made and the server responded with a status code that falls out of the range of 2xx
+    res.status(403).send({
+      title: 'Server responded with an error',
+      message: err.message
+    });
 
-	} else if (err.request) {
+  } else if (err.request) {
 
-		// The request was made but no response was received
-		res.status(503).send({ title: 'Unable to communicate with server', message: err.message });
+    // The request was made but no response was received
+    res.status(503).send({
+      title: 'Unable to communicate with server',
+      message: err.message
+    });
 
-	} else {
-		// RETURN:  err: Error: invalid_base_currency   |||   err.message: invalid_base_currency
+  } else {
+    // RETURN:  err: Error: invalid_base_currency   |||   err.message: invalid_base_currency
 
-		// Something happened in setting up the request that triggered an Error (es: data.error.type)
-		// NODE default error handler (err, req, res, next)
-		// NODE default returns:		Error: Request failed with status code 500
-		// It sends   1) res.status(500)   and   2) {title:..., message:...}
-		res.status(500).send({ title: 'An unexpected error occurred', message: err.message });
-	}
+    // Something happened in setting up the request that triggered an Error (es: data.error.type)
+    // NODE default error handler (err, req, res, next)
+    // NODE default returns:		Error: Request failed with status code 500
+    // It sends   1) res.status(500)   and   2) {title:..., message:...}
+    res.status(500).send({
+      title: 'An unexpected error occurred',
+      message: err.message
+    });
+  }
 };
 
 // Fetch Latest Currency Rates - GET request to this API endpoint send data to client
 // Routing in NODE.js to api/rates
 app.get('/api/rates', async (req, res) => {
-	try {
-		// Specific GET request from fixer-service
-		const data = await getRates();
-		// Otherwise browser guesses what type of content it will receive
-		res.setHeader('Content-Type', 'application/json');
-		res.send(data);
-	} catch (error) {
-		//----------------------------------------------------------------------------------------------ERROR HANDLER STEP 2
-		// Catch error from fixer-service (else) = throw new Error(data.error.type)
-		// Error: invalid_base_currency   <-Throwed error
-		errorHandler(error, req, res);
-	}
+  try {
+    // Specific GET request from fixer-service
+    const data = await getRates();
+    // Otherwise browser guesses what type of content it will receive
+    res.setHeader('Content-Type', 'application/json');
+    res.send(data);
+  } catch (error) {
+    //----------------------------------------------------------------------------------------------ERROR HANDLER STEP 2
+    // Catch error from fixer-service (else) = throw new Error(data.error.type)
+    // Error: invalid_base_currency   <-Throwed error
+    errorHandler(error, req, res);
+  }
 });
 
 /**
  **********************************************************************************************************FETCH SYMBOLS
  */
 app.get('/api/symbols', async (req, res) => {
-	try{
-		const data = await getSymbols();
-		res.setHeader('Content-Type', 'application/json');
-		res.send(data);
-	} catch(error) {
-		errorHandler(error, req, res);
-	}
+  try {
+    const data = await getSymbols();
+    res.setHeader('Content-Type', 'application/json');
+    res.send(data);
+  } catch (error) {
+    errorHandler(error, req, res);
+  }
 });
 
 /**
-********************************************************************************************************CONVERT CURRENCY
-*/
+ ********************************************************************************************************CONVERT CURRENCY
+ */
 app.post('/api/convert', async (req, res) => {
-	try {
-		const { from , to } = req.body;
-		const data = await convertCurrency(from, to);
-		res.setHeader('Content-Type', 'application/json');
-		res.send(data);
-	} catch (error) {
-		errorHandler(error, req, res);
-	}
+  try {
+    const { from, to } = req.body;
+    const data = await convertCurrency(from, to);
+    res.setHeader('Content-Type', 'application/json');
+    res.send(data);
+  } catch (error) {
+    errorHandler(error, req, res);
+  }
 });
 
 /**
@@ -96,14 +105,14 @@ app.post('/api/convert', async (req, res) => {
  */
 // Fetch Currency Rates by date
 app.post('/api/historical', async (req, res) => {
-	try {
-		const { date } = req.body;
-		const data = await getHistoricalRate(date);
-		res.setHeader('Content-Type', 'application/json');
-		res.send(data);
-	} catch (error) {
-		errorHandler(error, req, res);
-	}
+  try {
+    const { date } = req.body;
+    const data = await getHistoricalRate(date);
+    res.setHeader('Content-Type', 'application/json');
+    res.send(data);
+  } catch (error) {
+    errorHandler(error, req, res);
+  }
 });
 
 // Redirect all traffic to index.html
@@ -111,38 +120,38 @@ app.use((req, res) => res.sendFile(`${__dirname}/dist/index.html`));
 
 // Listen for HTTP requests on port 3000
 app.listen(port, () => {
-	console.log('listening on %d', port);
+  console.log('listening on %d', port);
 });
 
 //---------------------------------------------------------------------------------------------------------TEST GETRATES
 // Test with async await
-// const test = async() => {
-// 	const data = await getRates();
-// 	console.log(data);
+// const test = async () => {
+//   const data = await getRates();
+//   console.log(data);
 // };
 
 // Test with promise
-// getRates().then( response => {
-// 	console.log('response: ', response)
+// getRates().then(response => {
+//   console.log('response: ', response)
 // });
 
 //-------------------------------------------------------------------------------------------------------TEST GETSYMBOLS
 // Test Symbols Endpoint
-// const test = async() => {
-// 	const data = await getSymbols();
-// 	console.log(data.symbols);
+// const test = async () => {
+//   const data = await getSymbols();
+//   console.log(data.symbols);
 // }
 
 //------------------------------------------------------------------------------------TEST CURRENCY CONVERSION ENDPOINTS
 // Test Currency Conversion Endpoint
-// const test = async() => {
-// 	const data = await convertCurrency('USD', 'KES');
-// 	console.log(data);
+// const test = async () => {
+//   const data = await convertCurrency('USD', 'KES');
+//   console.log(data);
 // };
 
 //------------------------------------------------------------------------------------------------------HISTORICAL RATES
-// const test = async() => {
-// 	const data = await getHistoricalRate('2012-07-14');
-// 	console.log(data);
+// const test = async () => {
+//   const data = await getHistoricalRate('2012-07-14');
+//   console.log(data);
 // };
 // test();

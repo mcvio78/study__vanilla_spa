@@ -1,94 +1,94 @@
 #rates-page {
-	height: 80vh;
-	background-color: $secondary;
-	display: flex;
-	align-items: flex-start;
-	flex-direction: column;
+  height: 80vh;
+  background-color: $secondary;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
 
-	#rates-header {
-		width: 100%;
-		text-align: center;
-		border-bottom: .1rem solid $darkText;
-		background-color: $brightText;
-	}
+  #rates-header {
+    width: 100%;
+    text-align: center;
+    border-bottom: .1rem solid $darkText;
+    background-color: $brightText;
+  }
 
-	#rates-content {
-		width: 100%;
+  #rates-content {
+    width: 100%;
 
-		.info-date-base {
-			background-color: darken($brightText, 12%);
-			display: flex;
-			align-items: flex-start;
+    .info-date-base {
+      background-color: darken($brightText, 12%);
+      display: flex;
+      align-items: flex-start;
 
-			.info-container {
-				display: flex;
-				justify-items: flex-start;
-				align-items: center;
-				padding: 1rem;
+      .info-container {
+        display: flex;
+        justify-items: flex-start;
+        align-items: center;
+        padding: 1rem;
 
-				.icon-box {
-					margin-right: 1rem;
-				}
+        .icon-box {
+          margin-right: 1rem;
+        }
 
-				.data-box {
-					.date-label {
-						display: block;
-						margin: 0;
-						font-weight: bold;
-					}
+        .data-box {
+          .date-label {
+            display: block;
+            margin: 0;
+            font-weight: bold;
+          }
 
-					.base-label {
-						display: block;
-						margin: 0;
-						font-weight: bold;
-					}
-				}
-			}
-		}
+          .base-label {
+            display: block;
+            margin: 0;
+            font-weight: bold;
+          }
+        }
+      }
+    }
 
-		.code-rate-chart {
-			background-color: $secondary;
-			width: 100%;
+    .code-rate-chart {
+      background-color: $secondary;
+      width: 100%;
 
-			table {
-				width: 100%;
+      table {
+        width: 100%;
 
-				thead {
-					width: 100%;
+        thead {
+          width: 100%;
 
-					tr {
-						th {
-							text-align: center;
-							width: 50%;
-							font-weight: 500;
-							background-color: darken($secondary, 50%);
-							color: $brightText;
+          tr {
+            th {
+              text-align: center;
+              width: 50%;
+              font-weight: 500;
+              background-color: darken($secondary, 50%);
+              color: $brightText;
 
-							@include toolBelt;
+              @include toolBelt;
 
-							border-top: 0;
-						}
-					}
-				}
+              border-top: 0;
+            }
+          }
+        }
 
-				tbody {
-					width: 100%;
-					background-color: darken($secondary, 10%);
+        tbody {
+          width: 100%;
+          background-color: darken($secondary, 10%);
 
-					tr {
-						&:nth-child(even) {
-							//font-weight: bold;
-							background-color: darken($secondary, 20%);
-						}
+          tr {
+            &:nth-child(even) {
+              //font-weight: bold;
+              background-color: darken($secondary, 20%);
+            }
 
-						td {
-							text-align: center;
+            td {
+              text-align: center;
 
-							@include toolBelt;
-						}
-					}
-				}
-			}
-		}
-	}
+              @include toolBelt;
+            }
+          }
+        }
+      }
+    }
+  }
 }

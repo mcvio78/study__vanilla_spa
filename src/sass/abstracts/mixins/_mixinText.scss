@@ -1,13 +1,13 @@
 @mixin toolBelt {
-	box-sizing: border-box;
-	border-top: 1px rgba($darkText, .12) solid;
-	padding: 16px 0;
-	//background-color: darken($brightText, 30%);
-	//width: 100%;
+  box-sizing: border-box;
+  border-top: 1px rgba($darkText, .12) solid;
+  padding: 16px 0;
+  //background-color: darken($brightText, 30%);
+  //width: 100%;
 
-	&:hover {
-		//border: 0px rgba($darkText, .5) dashed;
-		background-color: lighten($darkText, 20%);
-		color: $brightText;
-	}
+  &:hover {
+    //border: 0px rgba($darkText, .5) dashed;
+    background-color: lighten($darkText, 20%);
+    color: $brightText;
+  }
 }

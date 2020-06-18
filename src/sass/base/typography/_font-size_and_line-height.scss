@@ -1,10 +1,10 @@
 html {
-	font-family: Raleway, sans-serif;
+  font-family: Raleway, sans-serif;
 
-	/* $base-font-size: 16px !default; ( _variables.scss ) */
-	// Todo: Try to fix this is too big responsive font.
-	//font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
-	//line-height: calc(1.3em + (1.5 - 1.2) * ((100vw - 300px)/(1600 - 300)));
+  /* $base-font-size: 16px !default; ( _variables.scss ) */
+  // Todo: Try to fix this is too big responsive font.
+  //font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
+  //line-height: calc(1.3em + (1.5 - 1.2) * ((100vw - 300px)/(1600 - 300)));
 }
 
 //*:not(.fa) {

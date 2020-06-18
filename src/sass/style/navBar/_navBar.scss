@@ -1,39 +1,39 @@
 #navigation-bar {
-	background-color: $primary;
-	color: $brightText;
-	padding: 1rem 0;
-	height: 20vh;
+  background-color: $primary;
+  color: $brightText;
+  padding: 1rem 0;
+  height: 20vh;
 
-	border: {
-		top-left-radius: 5px;
-		top-right-radius: 5px;
-	}
+  border: {
+    top-left-radius: 5px;
+    top-right-radius: 5px;
+  }
 
-	.title {
-		h1 {
-			text-align: center;
-			margin: 1rem 0;
-		}
-	}
+  .title {
+    h1 {
+      text-align: center;
+      margin: 1rem 0;
+    }
+  }
 
-	.links { /* flex */
-		display: flex;
-		justify-content: center;
-		margin-bottom: 1rem;
-	}
+  .links { /* flex */
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
 
-	a { /* items */
-		background-color: darken($primary, 10%);
-		color: $darkText;
-		border-radius: 5px;
-		padding: .5rem 1rem;
-		margin: 0 .1rem;
-		text-align: center;
+  a { /* items */
+    background-color: darken($primary, 10%);
+    color: $darkText;
+    border-radius: 5px;
+    padding: .5rem 1rem;
+    margin: 0 .1rem;
+    text-align: center;
 
-		@extend %linkHover;
-	}
+    @extend %linkHover;
+  }
 
-	.active {
-		background-color: lighten($primary, 80%);
-	}
+  .active {
+    background-color: lighten($primary, 80%);
+  }
 }

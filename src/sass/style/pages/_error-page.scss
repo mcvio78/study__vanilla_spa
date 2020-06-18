@@ -1,24 +1,24 @@
 #error-page {
-	height: 80vh;
+  height: 80vh;
 
-	display: flex;
-	justify-content: center;
+  display: flex;
+  justify-content: center;
 
-	#description-section {
-		padding: 2rem;
-		text-align: center;
-	}
+  #description-section {
+    padding: 2rem;
+    text-align: center;
+  }
 
-	.material-icons {
-		font-size: 4rem;
-	}
+  .material-icons {
+    font-size: 4rem;
+  }
 }
 
-.server-works{
-	background-color: $alert-color;
+.server-works {
+  background-color: $alert-color;
 }
 
 .server-error {
-	background-color: $server-error-background;
-	color: $brightText;
+  background-color: $server-error-background;
+  color: $brightText;
 }
