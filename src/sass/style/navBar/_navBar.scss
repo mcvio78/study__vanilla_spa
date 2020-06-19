@@ -29,6 +29,7 @@
     padding: .5rem 1rem;
     margin: 0 .1rem;
     text-align: center;
+    z-index: 100;
 
     @extend %linkHover;
   }
