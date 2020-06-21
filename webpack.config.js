@@ -116,7 +116,8 @@ module.exports = () => {
         cleanAfterEveryBuildPatterns: ['dist']
       }),
       new Dotenv({
-        path: path.resolve(__dirname, process.env.NODE_ENV === 'production' ? './.env' : './.env.dev')
+        path: path.resolve(__dirname, process.env.TARGET_ENV === 'production' ? './.env' : './.env.dev'),
+        systemvars: process.env.TARGET_ENV === 'production'
       })
     ],
   };

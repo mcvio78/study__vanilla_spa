@@ -41,7 +41,7 @@ window.addEventListener('load', () => {
     // Instantiate api handler
     // API client for communicating with our proxy server [(2)proxy server]
   const api = axios.create({ /* eslint-disable-line */
-      baseURL: process.env.PROXY_URL + '/api',
+      baseURL: process.env.PROXY_URL,
       timeout: 5000,
     });
 
@@ -140,7 +140,7 @@ window.addEventListener('load', () => {
         // const amount = document.forms.exchange_form.amount;
         // const amountValue = amount.value;
 
-        const re = new RegExp('[0][0-9]', 'g');
+        const re = new RegExp('^0');
 
         const errorModal = $('.error-modal');
         errorModal.css('display', 'flex');

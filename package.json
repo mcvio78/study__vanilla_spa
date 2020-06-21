@@ -10,8 +10,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint --ignore-path .gitignore .",
     "server": "webpack-dev-server",
-    "build:dev": "cross-env NODE_ENV=development webpack -d --progress",
-    "build": "cross-env NODE_ENV=production webpack -p --progress",
+    "build:dev": "webpack -d --progress",
+    "build": "cross-env TARGET_ENV=production webpack -p --progress",
+    "heroku-postbuild": "cross-env TARGET_ENV=production webpack -p --progress",
     "start": "node server.js"
   },
   "repository": {
