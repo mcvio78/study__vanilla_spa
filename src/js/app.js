@@ -41,7 +41,7 @@ window.addEventListener('load', () => {
     // Instantiate api handler
     // API client for communicating with our proxy server [(2)proxy server]
   const api = axios.create({ /* eslint-disable-line */
-      baseURL: process.env.PROXY_URL,
+      baseURL: process.env.PROXY_URL + '/api',
       timeout: 5000,
     });
 
