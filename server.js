@@ -14,12 +14,12 @@ app.use(express.static('dist'));
 app.use('/scripts', express.static(`${__dirname}/node_modules/`));
 
 /** Place this code right before the error handler function **/
-// Parse POST data as URL encoded data
+// Parse POST data as URL encoded data(MIDDLEWARE: nested objects to string)
 app.use(bodyParser.urlencoded({
   extended: true,
 }));
 
-// Parse POST data as JSON
+// Parse POST data as JSON(MIDDLEWARE: form data to be available in req.body)
 app.use(bodyParser.json());
 
 // Express Error handler
